@@ -529,96 +529,78 @@ body.modal-open { overflow: hidden; }
   to { transform: scale(1); opacity: 1; }
 }
 
-/* ==== Slimmer left sidebar + smaller fonts (iPad friendly) ==== */
 
-/* 左栏从 420px 收到更紧凑的区间 */
+/* ===== Fix 1: 左侧标题可换行、不截断 ===== */
 .mission-container{
-  grid-template-columns: clamp(200px, 26vw, 320px) 1fr;
+  /* 给左栏一个更安全的最小宽度，同时保持自适应 */
+  grid-template-columns: minmax(260px, 24vw) 1fr;
 }
 
-/* 左栏内边距/行距更紧凑 */
 .mission-sidebar{
-  padding: 28px 22px;
-  gap: 14px;
+  overflow: auto;                     /* 内容多时可滚动，避免被裁切 */
 }
 
-/* 左栏标题（“Mission Board / Dish / Steps”这类）更小 */
 .mission-title,
+.mission-sidebar h1,
 .mission-sidebar h2,
 .mission-sidebar h3{
-  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
-  margin-bottom: 14px;
-  line-height: 1.2;
+  white-space: normal;                /* 允许换行 */
+  overflow-wrap: anywhere;            /* 长单词/长串字符可断开 */
+  word-break: break-word;             /* 保险：必要时强制断词 */
+  hyphens: auto;                      /* 支持自动连字符（可用时） */
 }
 
-/* 步骤列表行距与字号缩小 */
-.mission-list{
-  gap: 16px;
-}
-.mission-item{
-  gap: 10px;
-  font-size: clamp(0.9rem, 1.2vw, 1rem);
-  line-height: 1.25;
-}
-.circle{
-  width: 22px;
-  height: 22px;
-  border-width: 2px;
-}
-
-/* 右侧依旧三列，但给出更紧凑的默认间距 */
+/* ===== Fix 2: 拼图保持完美正方形 ===== */
+/* 右侧区域仍然可换行，但拼图整体用 aspect-ratio 锁定为 1:1 */
 .right-section{
-  gap: 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 28px);
+  flex-wrap: wrap;
 }
 
-/* 拼图略微再收一点，避免被右侧信息卡/头像挤压 */
 .puzzle-grid{
-  --tile: min(17.5vw, 176px); /* 原来更大，这里小一档 */
-  grid-template-columns: repeat(3, var(--tile));
-  grid-template-rows:    repeat(3, var(--tile));
-  gap: 6px;
-  margin-top: clamp(32px, 7vh, 76px);
+  /* 让拼图在行内占据一个“盒子”，宽度随屏幕变化，上限不挤爆 */
+  flex: 1 1 420px;                    /* 最小理想宽度 420px，可缩可增 */
+  width: clamp(320px, 42vw, 520px);   /* 横屏 iPad Pro 约 1366px 时，大约 570px 左右 */
+  max-width: 100%;
+  aspect-ratio: 1/1;                  /* 整体严格正方形 */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: clamp(24px, 6vh, 72px);
 }
 
-/* 信息卡与头像也相应更紧凑 */
+/* 每一块也锁定为正方形，避免由行高导致的拉伸 */
+.puzzle-piece{
+  aspect-ratio: 1/1;
+  background-size: 300% 300%;         /* 仍保持 3x3 切图逻辑 */
+  border-radius: 10px;
+}
+
+/* 信息卡和头像列的自适应宽高，确保不会压缩拼图盒子 */
 .info-panel{
-  width: clamp(220px, 21vw, 260px);
-  margin-top: clamp(28px, 6vh, 72px);
+  width: clamp(220px, 22vw, 280px);
+}
+
+.avatar-column{
+  gap: clamp(12px, 2vw, 28px);
 }
 .avatar{
-  width: clamp(80px, 9.5vw, 130px);
-  height: clamp(80px, 9.5vw, 130px);
-  margin: 10px 0;
+  width: clamp(80px, 10vw, 140px);
+  height: clamp(80px, 10vw, 140px);
 }
 
-/* —— iPad 横屏 —— */
+/* ===== iPad 竖屏/窄屏时的堆叠顺序与更紧凑尺寸 ===== */
 @media (max-width: 1024px){
-  .mission-container{
-    grid-template-columns: clamp(190px, 24vw, 300px) 1fr;
-  }
-  .puzzle-grid{ --tile: min(19vw, 160px); }
-  .info-panel{ width: clamp(210px, 24vw, 250px); }
+  .mission-container{ grid-template-columns: minmax(240px, 26vw) 1fr; }
+  .puzzle-grid{ width: clamp(300px, 56vw, 480px); }
 }
-
-/* —— iPad 竖屏/小平板 —— */
 @media (max-width: 820px){
-  .mission-container{
-    grid-template-columns: clamp(180px, 32vw, 260px) 1fr;
-  }
-  .right-section{
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .puzzle-grid{ --tile: min(27vw, 145px); }
-  .info-panel{
-    width: min(88vw, 360px);
-    position: static;
-    margin: 8px auto 0;
-  }
-  .avatar{
-    width: clamp(68px, 15vw, 96px);
-    height: clamp(68px, 15vw, 96px);
-  }
+  .mission-container{ grid-template-columns: 1fr; }
+  .right-section{ flex-direction: column; align-items: center; }
+  .puzzle-grid{ width: min(90vw, 420px); }
+  .info-panel{ width: min(90vw, 360px); }
+  .avatar-column{ flex-direction: row; justify-content: center; }
 }
-
