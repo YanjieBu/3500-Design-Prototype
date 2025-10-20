@@ -120,8 +120,8 @@
   margin-top: 100px;
   margin-right:40px;
   display: grid;
-  grid-template-columns: repeat(3, clamp(200px, 12vw, 400px));
-  grid-template-rows: repeat(3, clamp(200px, 12vw, 400px));
+  grid-template-columns: repeat(3, clamp(100px, 12vw, 300px));
+  grid-template-rows: repeat(3, clamp(100px, 12vw, 300px));
   gap: 8px;
 }
 
@@ -529,103 +529,92 @@ body.modal-open { overflow: hidden; }
   to { transform: scale(1); opacity: 1; }
 }
 
-/* ===== iPad / Tablet responsive tweaks for Mission page ===== */
+/* ===== iPad / Tablet responsive refined version ===== */
 
-/* 左侧：固定宽度用 clamp，与首页风格对齐 */
-.mission-container{
-  grid-template-columns: clamp(300px, 34vw, 420px) 1fr;
+/* 左侧栏保持主页比例一致 */
+.mission-container {
+  grid-template-columns: clamp(300px, 32vw, 420px) 1fr;
 }
 
-/* 进度条：去掉死宽度，适配不同屏幕 */
-.progress-wrap{
+/* 进度条适配 */
+.progress-wrap {
   top: 24px;
   right: 24px;
-  width: clamp(240px, 32vw, 420px);
+  width: clamp(240px, 28vw, 380px);
 }
 
-/* 信息卡与头像列：用 clamp 做宽高上限，跟随拼图缩放 */
-.info-panel{
-  width: clamp(240px, 24vw, 300px);
-  margin-top: clamp(40px, 8vh, 100px);
+/* 信息卡和头像列保持固定比例 */
+.info-panel {
+  width: clamp(240px, 22vw, 280px);
+  margin-top: clamp(40px, 6vh, 80px);
 }
 
-.avatar{
-  width: clamp(90px, 12vw, 160px);
-  height: clamp(90px, 12vw, 160px);
+.avatar {
+  width: clamp(90px, 10vw, 140px);
+  height: clamp(90px, 10vw, 140px);
 }
 
-/* 拼图宫格：以 vw 为基准，避免在 iPad 上溢出 */
-.puzzle-grid{
-  /* 统一用一个“块尺寸”变量，横向 3 列、纵向 3 行 */
-  --tile: min(22vw, 240px);
+/* ✅ 缩小拼图尺寸（主修改部分） */
+.puzzle-grid {
+  --tile: min(18vw, 180px); /* 从 22vw 缩小到 18vw */
   grid-template-columns: repeat(3, var(--tile));
-  grid-template-rows:    repeat(3, var(--tile));
-  gap: 8px;
-  margin-top: clamp(40px, 10vh, 100px);
-  margin-right: clamp(8px, 2vw, 40px);
+  grid-template-rows: repeat(3, var(--tile));
+  gap: 6px;
+  margin-top: clamp(40px, 8vh, 80px);
+  margin-right: clamp(6px, 2vw, 20px);
 }
 
-/* 右侧三列容器：在窄屏允许换行并居中 */
-.right-section{
-  gap: clamp(16px, 2vw, 28px);
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
+/* iPad 横屏下（≤1024px） */
+@media (max-width: 1024px) {
+  .mission-container {
+    grid-template-columns: clamp(260px, 34vw, 360px) 1fr;
+  }
+  .puzzle-grid {
+    --tile: min(20vw, 160px); /* 再缩小一点 */
+  }
+  .info-panel { width: clamp(220px, 28vw, 260px); }
 }
 
-/* ====== 断点：横向 iPad（≤1024px） ====== */
-@media (max-width: 1024px){
-  .mission-container{
-    grid-template-columns: clamp(280px, 36vw, 380px) 1fr;
-  }
-  .progress-wrap{
-    top: 18px;
-    right: 18px;
-    width: clamp(220px, 40vw, 360px);
-  }
-  .puzzle-grid{
-    --tile: min(26vw, 200px); /* 再收一点，保证三列能并排 */
-  }
-  .info-panel{ width: clamp(220px, 30vw, 280px); }
-}
-
-/* ====== 断点：竖向 iPad / 小平板（≤820px） ====== */
-@media (max-width: 820px){
-  .mission-container{
+/* iPad 竖屏 / 小平板（≤820px） */
+@media (max-width: 820px) {
+  .mission-container {
     grid-template-columns: clamp(240px, 40vw, 320px) 1fr;
   }
-  .progress-wrap{
-    position: static;         /* 竖屏时放到内容流里 */
-    width: min(88vw, 420px);  /* 居中占宽 */
+  .progress-wrap {
+    position: static;
+    width: min(88vw, 400px);
     margin: 10px auto 0;
   }
-  .mission-content{
+  .mission-content {
     align-items: center;
-    padding-top: 20px;        /* 去掉给绝对定位预留的高度 */
+    padding-top: 20px;
   }
-  .right-section{
-    gap: 16px;
+  .right-section {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  .puzzle-grid{
-    --tile: min(28vw, 180px);
-    margin: 16px 0 0 0;
+  .puzzle-grid {
+    --tile: min(28vw, 150px); /* 小平板更小一点 */
+    margin: 12px 0 0 0;
   }
-  .info-panel{
-    order: 3;                 /* 小屏下：拼图 → 头像 → 信息卡 */
-    width: min(92vw, 420px);
-    position: static;         /* 取消 sticky，防止遮挡 */
+  .info-panel {
+    order: 3;
+    width: min(90vw, 380px);
+    position: static;
     margin: 8px auto 0;
   }
-  .avatar-column{
+  .avatar-column {
     order: 2;
     flex-direction: row;
-    gap: 14px;
+    gap: 10px;
     min-width: auto;
     height: auto;
   }
-  .avatar{
-    width: clamp(80px, 18vw, 120px);
-    height: clamp(80px, 18vw, 120px);
-    margin: 8px 0;
+  .avatar {
+    width: clamp(70px, 16vw, 100px);
+    height: clamp(70px, 16vw, 100px);
+    margin: 6px 0;
   }
 }
+
