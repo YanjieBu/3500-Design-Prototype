@@ -1,4 +1,4 @@
-/* 顶部栏样式 */
+/* 顶部样式 */
 .top-bar {
     display: grid;
     grid-template-columns: 420px 1fr;
@@ -278,6 +278,7 @@
     align-items: center;
     margin-bottom: 20px;
     gap: 15px;
+    width: 100%;
 }
 
 .cuisine-title {
@@ -295,12 +296,16 @@
     background: linear-gradient(to right, #999, #ccc);
 }
 
+/* 记录分割线的宽度，用于对齐卡片 */
+.cuisine-section {
+    width: 100%;
+}
+
+/* 关键改动：食谱卡片网格 - 永远4列，适应屏幕 */
 .recipe-grid {
     display: grid;
-    grid-template-columns: repeat(4, 200px);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    justify-content: start;
-    align-items: start;
     width: 100%;
 }
 
@@ -311,8 +316,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     background: white;
-    width: 200px;
-    height: 240px;
+    aspect-ratio: 200 / 240;
     display: flex;
     flex-direction: column;
 }
@@ -329,7 +333,7 @@
 
 .recipe-image {
     width: 100%;
-    height: 160px;
+    height: 60%;
     object-fit: cover;
 }
 
@@ -496,9 +500,8 @@
     transition: all 0.3s ease;
 }
 
-/* 添加响应式适配 - 特别是iPad */
+/* iPad及以下屏幕适配 */
 @media screen and (max-width: 1024px) {
-    /* 主容器在iPad上使用flex布局 */
     .main-container {
         display: flex;
     }
@@ -522,60 +525,48 @@
         z-index: 10;
     }
     
-    /* iPad上的右侧面板调整 */
     .right-panel {
         flex: 1;
         min-width: 0;
     }
     
-    /* iPad上的网格调整 - 固定4列 */
+    /* 在小屏幕上调整为3列 */
     .recipe-grid {
-        grid-template-columns: repeat(4, 160px);
+        grid-template-columns: repeat(3, 1fr);
         gap: 15px;
-        justify-content: start;
     }
     
     .recipe-card {
-        width: 160px;
-        height: 200px;
+        aspect-ratio: 160 / 200;
     }
     
     .recipe-image {
-        height: 130px;
+        height: 65%;
     }
     
     .recipe-name {
-        padding: 10px;
-        font-size: 0.85em;
+        padding: 8px;
+        font-size: 0.8em;
     }
     
-    /* 如果屏幕太窄，改为3列 */
-    @media screen and (max-width: 900px) {
-        .recipe-grid {
-            grid-template-columns: repeat(3, 160px);
-        }
-    }
-    
-    /* 如果屏幕更窄，改为2列 */
-    @media screen and (max-width: 750px) {
-        .recipe-grid {
-            grid-template-columns: repeat(2, 160px);
-        }
-    }
-    
-    /* 标签按钮更紧凑 */
     .tab {
         padding: 10px 20px;
         font-size: 0.95em;
     }
     
-    /* 内容区域更小的内边距 */
     .content-area {
         padding: 0 15px 20px 15px;
     }
     
     .cuisine-section {
         margin-bottom: 30px;
+    }
+}
+
+/* 更小屏幕 - 2列 */
+@media screen and (max-width: 750px) {
+    .recipe-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
