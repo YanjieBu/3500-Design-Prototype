@@ -21,10 +21,12 @@
 }
 
 .top-left h1 {
-    font-family: 'Brush Script MT', cursive;
+    font-family: 'Brush Script MT', 'Snell Roundhand', 'Bradley Hand ITC', 'Marker Felt', 'Lucida Handwriting', cursive;
     font-size: 2em;
     margin-bottom: 0;
     color: white;
+    font-weight: normal;
+    font-style: italic;
 }
 
 .top-left .date {
@@ -44,10 +46,12 @@
 }
 
 .recipe-title {
-    font-family: 'Brush Script MT', cursive;
+    font-family: 'Brush Script MT', 'Snell Roundhand', 'Bradley Hand ITC', 'Marker Felt', 'Lucida Handwriting', cursive;
     font-size: 2em;
     color: white;
     white-space: nowrap;
+    font-weight: normal;
+    font-style: italic;
 }
 
 .search-bar {
@@ -75,11 +79,13 @@
     padding: 10px 30px;
     border-radius: 25px;
     font-size: 1.1em;
-    font-family: 'Brush Script MT', cursive;
+    font-family: 'Brush Script MT', 'Snell Roundhand', 'Bradley Hand ITC', 'Marker Felt', 'Lucida Handwriting', cursive;
     cursor: pointer;
     transition: all 0.3s;
     white-space: nowrap;
     color: white;
+    font-weight: normal;
+    font-style: italic;
 }
 
 .start-btn:hover {
@@ -88,10 +94,10 @@
 
 /* 主容器 */
 .main-container {
-    display: grid;
-    grid-template-columns: 420px 1fr;
+    display: flex;
     height: 100vh;
     padding-top: 70px;
+    width: 100%;
 }
 
 /* 左侧面板 - 时间表 */
@@ -101,10 +107,8 @@
     flex-direction: column;
     height: calc(100vh - 70px);
     height: calc(100vh - 70px - env(safe-area-inset-bottom));
-    position: fixed;
-    left: 0;
-    top: 70px;
     width: 420px;
+    flex-shrink: 0;
     overflow: hidden;
 }
 
@@ -141,6 +145,9 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    min-height: 0;
 }
 
 .time-row {
@@ -209,6 +216,8 @@
     justify-content: center;
     gap: 10px;
     font-size: 1.1em;
+    flex-shrink: 0;
+    min-height: 60px;
 }
 
 /* 右侧面板 - 菜单 */
@@ -216,8 +225,10 @@
     background: #f5ede0;
     display: flex;
     flex-direction: column;
-    margin-left: 420px;
+    flex: 1;
     min-height: calc(100vh - 70px);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .tabs {
@@ -225,6 +236,7 @@
     display: flex;
     gap: 10px;
     padding: 20px 30px;
+    flex-wrap: wrap;
 }
 
 .tab {
@@ -237,6 +249,7 @@
     transition: all 0.3s;
     color: white;
     font-weight: 500;
+    font-family: 'Brush Script MT', 'Snell Roundhand', 'Bradley Hand ITC', 'Marker Felt', 'Lucida Handwriting', cursive;
 }
 
 .tab.active {
@@ -252,6 +265,8 @@
 .content-area {
     flex: 1;
     padding: 0 30px 30px 30px;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .cuisine-section {
@@ -266,10 +281,12 @@
 }
 
 .cuisine-title {
-    font-family: 'Brush Script MT', cursive;
+    font-family: 'Brush Script MT', 'Snell Roundhand', 'Bradley Hand ITC', 'Marker Felt', 'Lucida Handwriting', cursive;
     font-size: 2em;
     color: #333;
     white-space: nowrap;
+    font-weight: normal;
+    font-style: italic;
 }
 
 .divider {
@@ -280,9 +297,11 @@
 
 .recipe-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(200px, 240px));
+    grid-template-columns: repeat(auto-fill, 200px);
     gap: 20px;
+    justify-content: center;
     align-items: start;
+    width: 100%;
 }
 
 .recipe-card {
@@ -292,6 +311,10 @@
     cursor: pointer;
     transition: all 0.3s ease;
     background: white;
+    width: 200px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
 }
 
 .recipe-card:hover {
@@ -306,16 +329,20 @@
 
 .recipe-image {
     width: 100%;
-    height: 180px;
+    height: 160px;
     object-fit: cover;
 }
 
 .recipe-name {
-    padding: 15px;
+    padding: 12px;
     text-align: center;
     font-weight: bold;
     color: #333;
-    font-size: 0.95em;
+    font-size: 0.9em;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* 成功弹窗样式 */
@@ -386,6 +413,7 @@
     align-items: center;
     justify-content: center;
     transition: background 0.3s;
+    font-family: 'Brush Script MT', 'Snell Roundhand', 'Bradley Hand ITC', 'Marker Felt', 'Lucida Handwriting', cursive;
 }
 
 .close-btn:hover {
@@ -412,7 +440,7 @@
 }
 
 .success-text {
-    font-family: 'Brush Script MT', cursive;
+    font-family: 'Brush Script MT', 'Snell Roundhand', 'Bradley Hand ITC', 'Marker Felt', 'Lucida Handwriting', cursive;
     font-size: 1.8em;
     color: #333;
     margin: 0;
@@ -466,4 +494,91 @@
 
 .instruction {
     transition: all 0.3s ease;
+}
+
+/* 添加响应式适配 - 特别是iPad */
+@media screen and (max-width: 1024px) {
+    /* 主容器在iPad上使用flex布局 */
+    .main-container {
+        display: flex;
+    }
+    
+    .left-panel {
+        width: 420px;
+        flex-shrink: 0;
+    }
+    
+    .timetable-container {
+        max-height: calc(100vh - 70px - 80px);
+    }
+    
+    .time-row {
+        min-height: 45px;
+    }
+    
+    .instruction {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+    }
+    
+    /* iPad上的右侧面板调整 */
+    .right-panel {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    /* iPad上的网格调整 */
+    .recipe-grid {
+        grid-template-columns: repeat(auto-fill, 160px);
+        gap: 15px;
+    }
+    
+    .recipe-card {
+        width: 160px;
+        height: 200px;
+    }
+    
+    .recipe-image {
+        height: 130px;
+    }
+    
+    .recipe-name {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+    
+    /* 标签按钮更紧凑 */
+    .tab {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    
+    /* 内容区域更小的内边距 */
+    .content-area {
+        padding: 0 15px 20px 15px;
+    }
+    
+    .cuisine-section {
+        margin-bottom: 30px;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gray-medium);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-dark);
 }
