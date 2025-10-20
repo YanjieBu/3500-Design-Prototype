@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeTimeSlots() {
     // 为所有可拖拽的时间槽添加事件
     document.querySelectorAll('.time-cell.highlight').forEach(cell => {
-        cell.addEventListener('mousedown', handleTimeSlotMouseDown);
+        cell.addEventListener('mousedown', handleDragStart);
+        cell.addEventListener('touchstart', handleDragStart, { passive: false });
     });
     
     // 为空时间槽添加点击事件
@@ -30,15 +31,30 @@ function initializeTimeSlots() {
     });
 }
 
-// 处理时间槽的鼠标按下事件
-function handleTimeSlotMouseDown(e) {
+// 统一的拖拽处理函数
+function handleDragStart(e) {
+    if (!e.target.closest('.time-cell.highlight')) {
+        return;
+    }
+    
     e.preventDefault();
     
     const originalCell = e.target.closest('.time-cell');
     let hasMoved = false;
     
-    const onMouseMove = function(moveEvent) {
+    // 获取初始坐标（支持鼠标和触摸）
+    const getCoordinates = (event) => {
+        if (event.touches && event.touches.length > 0) {
+            return { x: event.touches[0].clientX, y: event.touches[0].clientY };
+        } else if (event.changedTouches && event.changedTouches.length > 0) {
+            return { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+        }
+        return { x: event.clientX, y: event.clientY };
+    };
+    
+    const onMove = function(moveEvent) {
         moveEvent.preventDefault();
+        const coords = getCoordinates(moveEvent);
         
         if (!hasMoved) {
             hasMoved = true;
@@ -51,17 +67,17 @@ function handleTimeSlotMouseDown(e) {
         
         // 更新拖拽元素位置
         if (dragElement) {
-            dragElement.style.left = (moveEvent.clientX + 10) + 'px';
-            dragElement.style.top = (moveEvent.clientY + 10) + 'px';
+            dragElement.style.left = (coords.x + 10) + 'px';
+            dragElement.style.top = (coords.y + 10) + 'px';
             
             // 检查是否在instruction区域
             const instruction = document.querySelector('.instruction');
             const rect = instruction.getBoundingClientRect();
             
-            if (moveEvent.clientX >= rect.left && 
-                moveEvent.clientX <= rect.right &&
-                moveEvent.clientY >= rect.top && 
-                moveEvent.clientY <= rect.bottom) {
+            if (coords.x >= rect.left && 
+                coords.x <= rect.right &&
+                coords.y >= rect.top && 
+                coords.y <= rect.bottom) {
                 instruction.classList.add('drag-over');
             } else {
                 instruction.classList.remove('drag-over');
@@ -69,9 +85,16 @@ function handleTimeSlotMouseDown(e) {
         }
     };
     
-    const onMouseUp = function(upEvent) {
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
+    const onEnd = function(endEvent) {
+        // 移除事件监听
+        if (endEvent.type.includes('mouse')) {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onEnd);
+        } else {
+            document.removeEventListener('touchmove', onMove);
+            document.removeEventListener('touchend', onEnd);
+            document.removeEventListener('touchcancel', onEnd);
+        }
         
         originalCell.style.opacity = '';
         
@@ -79,29 +102,36 @@ function handleTimeSlotMouseDown(e) {
         instruction.classList.remove('drag-over');
         
         if (hasMoved && dragElement) {
+            // 获取结束坐标
+            const endCoords = getCoordinates(endEvent);
+            
             // 检查是否拖到了instruction区域
             const rect = instruction.getBoundingClientRect();
             
-            if (upEvent.clientX >= rect.left && 
-                upEvent.clientX <= rect.right &&
-                upEvent.clientY >= rect.top && 
-                upEvent.clientY <= rect.bottom) {
+            if (endCoords.x >= rect.left && 
+                endCoords.x <= rect.right &&
+                endCoords.y >= rect.top && 
+                endCoords.y <= rect.bottom) {
                 showSuccessModal();
             }
             
             dragElement.remove();
             dragElement = null;
-        } else if (!hasMoved) {
-            // 快速点击，可以添加其他逻辑
-            console.log('时间槽被点击');
         }
         
         isDragging = false;
         hasMoved = false;
     };
     
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    // 根据事件类型添加相应的监听器
+    if (e.type.includes('mouse')) {
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onEnd);
+    } else {
+        document.addEventListener('touchmove', onMove, { passive: false });
+        document.addEventListener('touchend', onEnd);
+        document.addEventListener('touchcancel', onEnd);
+    }
 }
 
 // 创建拖拽元素
@@ -119,6 +149,8 @@ function createDragElement(originalCell) {
     dragElement.style.fontSize = '1.3em';
     dragElement.style.pointerEvents = 'none';
     dragElement.style.transform = 'rotate(-5deg)';
+    dragElement.style.webkitUserSelect = 'none';
+    dragElement.style.userSelect = 'none';
     
     // 获取时间槽信息
     const timeSlot = originalCell.closest('.time-slot');
