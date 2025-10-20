@@ -48,16 +48,27 @@ document.querySelectorAll('.recipe-card').forEach(card => {
     });
 });
 
-// 为高亮的时间块添加拖拽和单击功能
-document.addEventListener('mousedown', function(e) {
-    if (e.target.classList.contains('time-cell') && e.target.classList.contains('highlight')) {
+// 统一的拖拽处理函数
+function handleDragStart(e, target) {
+    if (target.classList.contains('time-cell') && target.classList.contains('highlight')) {
         e.preventDefault();
         
-        const originalCell = e.target;
+        const originalCell = target;
         let hasMoved = false;
         
-        const onMouseMove = function(moveEvent) {
+        // 获取初始坐标（支持鼠标和触摸）
+        const getCoordinates = (event) => {
+            if (event.touches && event.touches.length > 0) {
+                return { x: event.touches[0].clientX, y: event.touches[0].clientY };
+            } else if (event.changedTouches && event.changedTouches.length > 0) {
+                return { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+            }
+            return { x: event.clientX, y: event.clientY };
+        };
+        
+        const onMove = function(moveEvent) {
             moveEvent.preventDefault();
+            const coords = getCoordinates(moveEvent);
             
             if (!hasMoved) {
                 hasMoved = true;
@@ -77,6 +88,8 @@ document.addEventListener('mousedown', function(e) {
                 dragElement.style.fontSize = '1.3em';
                 dragElement.style.pointerEvents = 'none';
                 dragElement.style.transform = 'rotate(-5deg)';
+                dragElement.style.webkitUserSelect = 'none';
+                dragElement.style.userSelect = 'none';
                 
                 // 显示菜品名称
                 if (selectedCard) {
@@ -94,17 +107,17 @@ document.addEventListener('mousedown', function(e) {
             
             // 更新拖拽元素位置
             if (dragElement) {
-                dragElement.style.left = (moveEvent.clientX + 10) + 'px';
-                dragElement.style.top = (moveEvent.clientY + 10) + 'px';
+                dragElement.style.left = (coords.x + 10) + 'px';
+                dragElement.style.top = (coords.y + 10) + 'px';
                 
                 // 检查是否在instruction区域
                 const instruction = document.querySelector('.instruction');
                 const rect = instruction.getBoundingClientRect();
                 
-                if (moveEvent.clientX >= rect.left && 
-                    moveEvent.clientX <= rect.right &&
-                    moveEvent.clientY >= rect.top && 
-                    moveEvent.clientY <= rect.bottom) {
+                if (coords.x >= rect.left && 
+                    coords.x <= rect.right &&
+                    coords.y >= rect.top && 
+                    coords.y <= rect.bottom) {
                     instruction.classList.add('drag-over');
                 } else {
                     instruction.classList.remove('drag-over');
@@ -112,9 +125,16 @@ document.addEventListener('mousedown', function(e) {
             }
         };
         
-        const onMouseUp = function(upEvent) {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
+        const onEnd = function(endEvent) {
+            // 移除事件监听
+            if (endEvent.type.includes('mouse')) {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onEnd);
+            } else {
+                document.removeEventListener('touchmove', onMove);
+                document.removeEventListener('touchend', onEnd);
+                document.removeEventListener('touchcancel', onEnd);
+            }
             
             originalCell.style.opacity = '';
             
@@ -124,13 +144,16 @@ document.addEventListener('mousedown', function(e) {
             if (hasMoved && dragElement) {
                 console.log('拖拽结束');
                 
+                // 获取结束坐标
+                const endCoords = getCoordinates(endEvent);
+                
                 // 检查是否拖到了instruction区域
                 const rect = instruction.getBoundingClientRect();
                 
-                if (upEvent.clientX >= rect.left && 
-                    upEvent.clientX <= rect.right &&
-                    upEvent.clientY >= rect.top && 
-                    upEvent.clientY <= rect.bottom) {
+                if (endCoords.x >= rect.left && 
+                    endCoords.x <= rect.right &&
+                    endCoords.y >= rect.top && 
+                    endCoords.y <= rect.bottom) {
                     showSuccessModal();
                 }
                 
@@ -145,10 +168,27 @@ document.addEventListener('mousedown', function(e) {
             hasMoved = false;
         };
         
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
+        // 根据事件类型添加相应的监听器
+        if (e.type === 'mousedown') {
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onEnd);
+        } else {
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onEnd);
+            document.addEventListener('touchcancel', onEnd);
+        }
     }
+}
+
+// 鼠标事件监听
+document.addEventListener('mousedown', function(e) {
+    handleDragStart(e, e.target);
 });
+
+// 触摸事件监听
+document.addEventListener('touchstart', function(e) {
+    handleDragStart(e, e.target);
+}, { passive: false });
 
 // 显示成功弹窗
 function showSuccessModal() {
@@ -162,7 +202,7 @@ function showSuccessModal() {
             <button class="close-btn">&times;</button>
         </div>
         <div class="modal-body">
-            <div class="success-icon">✓</div>
+            <div class="success-icon">✔</div>
             <p class="success-text">Join successful! Please take the receipt.</p>
         </div>
     `;
