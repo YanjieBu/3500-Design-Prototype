@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriMate - Homepage</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="icon" type="image/png" href="images/111.png" />
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-left">
+            <h1>Timetable</h1>
+            <div class="date">Today: 15/09 Mon</div>
+        </div>
+        <div class="top-right">
+            <h1 class="recipe-title">Recipe Board</h1>
+            <div class="search-bar">
+                <span>🍊</span>
+                <input type="text" placeholder="">
+            </div>
+            <button class="start-btn">Start event!</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="left-panel">
+            <div class="timetable-container">
+                <div class="time-header">
+                    <div></div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                    <div>Sun</div>
+                </div>
+                
+                <div class="time-rows">
+                    <div class="time-row">
+                        <div class="time-label">9 - 10</div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">10 - 11</div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="kung-pao-chicken"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="tomato-eggs"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">11 - 12</div>
+                        <div class="time-cell public">Public Time</div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">12 - 13</div>
+                        <div class="time-cell filled" data-dish="mapo-tofu"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="fried-rice"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="beef-steak"></div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">13 - 14</div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="pasta"></div>
+                        <div class="time-cell"></div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">14 - 15</div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="pizza"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="fish-chips"></div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">15 - 16</div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">16 - 17</div>
+                        <div class="time-cell filled" data-dish="meat-pie"></div>
+                        <div class="time-cell filled" data-dish="pavlova"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">17 - 18</div>
+                        <div class="time-cell public">Public Time</div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">18 - 19</div>
+                        <div class="time-cell filled" data-dish="bbq-ribs"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="grilled-salmon"></div>
+                        <div class="time-cell"></div>
+                    </div>
+
+                    <div class="time-row">
+                        <div class="time-label">19 - 20</div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell"></div>
+                        <div class="time-cell filled" data-dish="fish-tacos"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instruction">
+                👆 Drag the tag here to join
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="tabs">
+                <button class="tab active">Worldwide</button>
+                <button class="tab">Asian</button>
+                <button class="tab">European</button>
+                <button class="tab">Oceania</button>
+            </div>
+
+            <div class="content-area">
+                <div class="cuisine-section">
+                    <div class="section-header">
+                        <h2 class="cuisine-title">Asian Cuisine</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="recipe-grid">
+                        <div class="recipe-card" data-dish="kung-pao-chicken">
+                            <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=400&h=300&fit=crop" alt="Kung Pao Chicken" class="recipe-image">
+                            <div class="recipe-name">Kung Pao Chicken</div>
+                        </div>
+                        <div class="recipe-card" data-dish="tomato-eggs">
+                            <img src="images/TomatoEggs.jpg" alt="Tomato Eggs" class="recipe-image">
+                            <div class="recipe-name">Tomato & Eggs</div>
+                        </div>
+                        <div class="recipe-card" data-dish="mapo-tofu">
+                            <img src="images/MapoTofu.png" alt="Mapo Tofu" class="recipe-image">
+                            <div class="recipe-name">Mapo Tofu</div>
+                        </div>
+                        <div class="recipe-card" data-dish="fried-rice">
+                            <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&h=300&fit=crop" alt="Fried Rice" class="recipe-image">
+                            <div class="recipe-name">Fried Rice</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cuisine-section">
+                    <div class="section-header">
+                        <h2 class="cuisine-title">European Cuisine</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="recipe-grid">
+                        <div class="recipe-card" data-dish="beef-steak">
+                            <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop" alt="Beef Steak" class="recipe-image">
+                            <div class="recipe-name">Beef Steak</div>
+                        </div>
+                        <div class="recipe-card" data-dish="pasta">
+                            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop" alt="Pasta" class="recipe-image">
+                            <div class="recipe-name">Italian Pasta</div>
+                        </div>
+                        <div class="recipe-card" data-dish="pizza">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop" alt="Pizza" class="recipe-image">
+                            <div class="recipe-name">Margherita Pizza</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cuisine-section">
+                    <div class="section-header">
+                        <h2 class="cuisine-title">Oceanian Cuisine</h2>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="recipe-grid">
+                        <div class="recipe-card" data-dish="fish-chips">
+                            <img src="images/FishChips.png" alt="Fish & Chips" class="recipe-image">
+                            <div class="recipe-name">Fish & Chips</div>
+                        </div>
+                        <div class="recipe-card" data-dish="meat-pie">
+                            <img src="images/MeatPie.jpg" alt="Meat Pie" class="recipe-image">
+                            <div class="recipe-name">Meat Pie</div>
+                        </div>
+                        <div class="recipe-card" data-dish="pavlova">
+                            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=300&fit=crop" alt="Pavlova" class="recipe-image">
+                            <div class="recipe-name">Pavlova</div>
+                        </div>
+                        <div class="recipe-card" data-dish="bbq-ribs">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop" alt="BBQ Ribs" class="recipe-image">
+                            <div class="recipe-name">BBQ Ribs</div>
+                        </div>
+                        <div class="recipe-card" data-dish="grilled-salmon">
+                            <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop" alt="Grilled Salmon" class="recipe-image">
+                            <div class="recipe-name">Grilled Salmon</div>
+                        </div>
+                        <div class="recipe-card" data-dish="fish-tacos">
+                            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&h=300&fit=crop" alt="Fish Tacos" class="recipe-image">
+                            <div class="recipe-name">Fish Tacos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/homepage.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event - Kung Pao Chicken Cooking Workshop</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/event.css">
+    <link rel="icon" type="image/png" href="images/111.png" />
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-left">
+            <h1>Event Details</h1>
+            <div class="date">Today: 15/09 Mon</div>
+        </div>
+        <div class="top-right">
+            <h1 class="recipe-title">Recipe Details</h1>
+            <div class="search-bar">
+                <span>🍴</span>
+                <input type="text" placeholder="">
+            </div>
+            <button class="start-btn">Start event!</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- 最左侧时间表 -->
+        <div class="timetable-column">
+            <div class="day-header">Mon</div>
+            <div class="time-slots">
+                <div class="time-slot">
+                    <div class="time-label">9 - 10</div>
+                    <div class="time-cell" data-time="9-10"></div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">10 - 11</div>
+                    <div class="time-cell highlight" data-time="10-11" data-event="kung-pao">
+                        <span class="event-name">Kung Pao</span>
+                    </div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">11 - 12</div>
+                    <div class="time-cell public" data-time="11-12">Public Time</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">12 - 13</div>
+                    <div class="time-cell" data-time="12-13"></div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">13 - 14</div>
+                    <div class="time-cell" data-time="13-14"></div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">14 - 15</div>
+                    <div class="time-cell" data-time="14-15"></div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">15 - 16</div>
+                    <div class="time-cell" data-time="15-16"></div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">16 - 17</div>
+                    <div class="time-cell" data-time="16-17"></div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">17 - 18</div>
+                    <div class="time-cell public" data-time="17-18">Public Time</div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">18 - 19</div>
+                    <div class="time-cell highlight" data-time="18-19" data-event="fried-prawns">
+                        <span class="event-name">Fried prawns</span>
+                    </div>
+                </div>
+                <div class="time-slot">
+                    <div class="time-label">19 - 20</div>
+                    <div class="time-cell" data-time="19-20"></div>
+                </div>
+            </div>
+            
+            <div class="instruction">
+                👇 Drag the tag here to join
+            </div>
+        </div>
+
+        <!-- 中间活动信息面板 -->
+        <div class="middle-panel">
+            <div class="event-info-card">
+                <h2 class="event-title">Kung Pao Chicken Cooking Workshop</h2>
+                
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Location:</span>
+                        <span class="detail-value">Community Kitchen, 2nd Floor</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Participants:</span>
+                        <span class="detail-value">5 people (maximum capacity)</span>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                        <span class="progress-text">3 / 5 , only 2 left</span>
+                    </div>
+                </div>
+                
+                <div class="notes-section">
+                    <h3 class="notes-title">Notes:</h3>
+                    <ul class="notes-list">
+                        <li>Ingredients and cooking tools will be provided.</li>
+                        <li>Please bring your own apron.</li>
+                        <li>No prior cooking experience required.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧详情和菜谱 -->
+        <div class="right-panel">
+            <div class="details-header">
+                <span class="back-arrow">←</span>
+                <h2 class="details-title">Kong Pao Chicken</h2>
+            </div>
+            
+            <div class="recipe-container">
+                
+                <div class="recipe-image-container">
+                    <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?w=600&h=400&fit=crop" alt="Kung Pao Chicken" class="recipe-main-image">
+                </div>
+                
+                <div class="ingredients-section">
+                    <h4 class="section-subtitle">Ingredients (2 servings)</h4>
+                    <ul class="ingredients-list">
+                        <li>200 g (7 oz) chicken (diced, preferably thigh meat)</li>
+                        <li>1/2 cup roasted peanuts</li>
+                        <li>2-3 dried red chilies (adjust to taste)</li>
+                        <li>3 green onions (chopped)</li>
+                        <li>2 cloves garlic (minced)</li>
+                        <li>1 tbsp soy sauce</li>
+                        <li>1 tbsp rice vinegar</li>
+                        <li>1 tsp sugar</li>
+                        <li>1 tbsp cooking oil</li>
+                        <li>1 tsp cornstarch</li>
+                    </ul>
+                    
+                    <div class="optional-garnishes">
+                        <h5>Optional garnishes</h5>
+                        <ul class="garnishes-list">
+                            <li>Sesame seeds</li>
+                            <li>Fresh cilantro</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="nutrition-section">
+                    <div class="nutrition-table">
+                        <div class="nutrition-row header">
+                            <div class="nutrition-category">Category</div>
+                            <div class="nutrition-rating">Rating (1-10)</div>
+                            <div class="nutrition-notes">Notes</div>
+                        </div>
+                        <div class="nutrition-row">
+                            <div class="nutrition-category">Protein</div>
+                            <div class="nutrition-rating">9/10</div>
+                            <div class="nutrition-notes">Chicken provides excellent lean protein for muscle repair and satiety.</div>
+                        </div>
+                        <div class="nutrition-row">
+                            <div class="nutrition-category">Healthy fats</div>
+                            <div class="nutrition-rating">7/10</div>
+                            <div class="nutrition-notes">Peanuts provide heart-healthy monounsaturated fats and additional protein.</div>
+                        </div>
+                        <div class="nutrition-row">
+                            <div class="nutrition-category">Carbohydrates</div>
+                            <div class="nutrition-rating">6/10</div>
+                            <div class="nutrition-notes">Relatively low in carbs; typically served with rice for a complete meal.</div>
+                        </div>
+                        <div class="nutrition-row">
+                            <div class="nutrition-category">Fiber</div>
+                            <div class="nutrition-rating">5/10</div>
+                            <div class="nutrition-notes">Peanuts and vegetables add some fiber, but overall moderate.</div>
+                        </div>
+                        <div class="nutrition-row">
+                            <div class="nutrition-category">Vitamins & Minerals</div>
+                            <div class="nutrition-rating">8/10</div>
+                            <div class="nutrition-notes">Rich in B vitamins from chicken, vitamin E from peanuts, and antioxidants from chili.</div>
+                        </div>
+                        <div class="nutrition-row">
+                            <div class="nutrition-category">Calories</div>
+                            <div class="nutrition-rating">7/10</div>
+                            <div class="nutrition-notes">Moderate calorie density; portion control important due to peanuts.</div>
+                        </div>
+                        <div class="nutrition-row">
+                            <div class="nutrition-category">Sodium</div>
+                            <div class="nutrition-rating">5/10</div>
+                            <div class="nutrition-notes">Soy sauce adds sodium; can be reduced by using low-sodium alternatives.</div>
+                        </div>
+                        <div class="nutrition-row overall">
+                            <div class="nutrition-category">Overall balance</div>
+                            <div class="nutrition-rating">7/10</div>
+                            <div class="nutrition-notes">A flavorful, protein-rich dish; balance improved with vegetables and controlled portions.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/event.js"></script>
+</body>
+</html>
