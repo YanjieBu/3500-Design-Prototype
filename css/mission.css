@@ -438,7 +438,6 @@ body.modal-open {
 
 /* ===== 左侧 Dish 名称标题自适应修正 ===== */
 .recipe-title {
-  font-family: 'Brush Script MT', cursive;
   font-size: clamp(1rem, 2vw, 1.6rem); /* 自动根据屏幕缩放 */
   color: white;
   line-height: 1.2;
@@ -447,5 +446,5 @@ body.modal-open {
   text-align: left;
   margin: 0 0 10px 0;       /* 与上方 Dish 间距 */
   max-width: 100%;          /* 保证不会溢出左栏 */
-  overflow-wrap: anywhere;  /* 长词也能断开 */
+  overflow-wrap: anywhere;  
 }
