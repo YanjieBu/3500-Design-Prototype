@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Progress</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/mission.css">
+    <link rel="icon" type="image/png" href="images/111.png" />
+</head>
+<body>
+    <!-- 已有 header -->
+    <div class="top-bar">
+        <div class="top-left">
+            <h1>Mission Board</h1>
+            <div class="date">Today: 18/10 Fri</div>
+        </div>
+        <div class="top-right">
+            <h1 class="recipe-title">Team Cooking: Dinner Together</h1>
+            <button class="start-btn">Reset</button>
+        </div>
+    </div>
+
+    <div class="mission-container">
+        <!-- 左侧任务栏 -->
+        <div class="mission-sidebar">
+            <h2 class="mission-title">Dish</h2>
+            <h1 class="recipe-title">Salmon Veggie Sushi Bowl</h1>
+            <h2 class="mission-title">Steps</h2>
+            <ul class="mission-list">
+                <li class="mission-item" data-id="1"><div class="circle"></div><span>Prepare Ingredients</span></li>
+                <li class="mission-item" data-id="2"><div class="circle"></div><span>Cook the Sushi Rice</span></li>
+                <li class="mission-item" data-id="3"><div class="circle"></div><span>Season the Rice</span></li>
+                <li class="mission-item" data-id="4"><div class="circle"></div><span>Slice the Salmon</span></li>
+                <li class="mission-item" data-id="5"><div class="circle"></div><span>Prepare Sauce</span></li>
+                <li class="mission-item" data-id="6"><div class="circle"></div><span>Arrange the Base</span></li>
+                <li class="mission-item" data-id="7"><div class="circle"></div><span>Add Vegetables</span></li>
+                <li class="mission-item" data-id="8"><div class="circle"></div><span>Add Salmon & Toppings</span></li>
+                <li class="mission-item" data-id="9"><div class="circle"></div><span>Drizzle Sauce & Serve</span></li>
+            </ul>
+        </div>
+
+        <!-- 右侧拼图区 -->
+        <div class="mission-content">
+          <div class="progress-wrap">
+              <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+              </div>
+              <span class="progress-text" id="progressText">0/9 (0%)</span>
+          </div>
+
+          <div class="right-section">
+              <div class="puzzle-grid">
+                <!-- 3x3 拼图 -->
+                  <div class="puzzle-piece" data-id="1"></div>
+                  <div class="puzzle-piece" data-id="2"></div>
+                  <div class="puzzle-piece" data-id="3"></div>
+                  <div class="puzzle-piece" data-id="4"></div>
+                  <div class="puzzle-piece" data-id="5"></div>
+                  <div class="puzzle-piece" data-id="6"></div>
+                  <div class="puzzle-piece" data-id="7"></div>
+                  <div class="puzzle-piece" data-id="8"></div>
+                  <div class="puzzle-piece" data-id="9"></div>
+              </div>
+
+              <div class="info-panel">
+                <h3 class="info-title">Ingredients</h3>
+
+                <ul class="ing-list">
+                    <li><span class="dot"></span>Sushi rice · 2 cups (cooked)</li>
+                    <li><span class="dot"></span>Salmon (sashimi-grade) · 200 g</li>
+                    <li><span class="dot"></span>Avocado · 1</li>
+                    <li><span class="dot"></span>Cucumber · 1/2</li>
+                    <li><span class="dot"></span>Carrot · 1</li>
+                    <li><span class="dot"></span>Edamame · 1 cup</li>
+                    <li><span class="dot"></span>Seaweed salad · 1/2 cup</li>
+                    <li><span class="dot"></span>Sesame seeds · 1 tbsp</li>
+                    <li><span class="dot"></span>Rice vinegar mix (vinegar+sugar+salt)</li>
+                </ul>
+
+                <div class="note">
+                    Tip: Keep salmon chilled. Gently fold sushi vinegar into warm rice.
+                </div>
+              </div>
+
+              <div class="avatar-column">
+                  <img src="PromotionalMaterial/Chef1.png" alt="Chef1" class="avatar">
+                  <img src="PromotionalMaterial/chef2.png" alt="Chef2" class="avatar">
+                  <img src="PromotionalMaterial/chef3.png" alt="Chef3" class="avatar">
+                  <img src="PromotionalMaterial/chef4.png" alt="Chef4" class="avatar">
+              </div>
+          </div>
+        </div>
+
+        <!-- Complete 弹窗 -->
+        <div id="completeModal" class="modal-backdrop" aria-hidden="true">
+          <div class="modal celebration" role="dialog" aria-modal="true">
+            <div class="modal-header">
+              <h2>🎉 Congratulations!</h2>
+            </div>
+
+          <div class="modal-body">
+            <img src="PromotionalMaterial/celebration.png" alt="Happy Student Illustration" class="celebration-img" id="draggableImage">
+            <p class="celebration-text">
+              Do you want to print illustrations?<br>
+              <span>Drag the illustration to print.</span>
+            </p>
+          </div>
+
+          <div class="modal-actions">
+              <button id="modalClose" class="btn btn-primary">Got it!</button>
+              <button id="modalReset" class="btn btn-secondary">Reset</button>
+          </div>
+        </div>
+
+  <!-- 拖拽目标区域 -->
+        <div id="printTarget" class="drop-zone">
+          <p>🖨️ Drag the tag here to print</p>
+          </div>
+        </div>
+
+    </div>
+
+    <script src="js/mission.js"></script>
+</body>
+</html>

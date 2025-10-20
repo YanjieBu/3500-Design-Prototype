@@ -1,0 +1,205 @@
+/* 基础样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: #f5ede0;
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+    line-height: 1.6;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* 标题样式 */
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 1.75em;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.3;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.4;
+}
+
+h4 {
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.4;
+}
+
+h5 {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.5;
+}
+
+h6 {
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* 段落样式 */
+p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 1em;
+}
+
+/* 链接样式 */
+a {
+    color: #c17457;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #8b4e3a;
+}
+
+/* 按钮基础样式 */
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 输入框基础样式 */
+input {
+    font-family: inherit;
+    font-size: 1em;
+    outline: none;
+}
+
+/* 图片样式 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 配色变量（CSS自定义属性） */
+:root {
+    /* 主色调 - 暖橙棕色系 */
+    --primary-orange: #c17457;
+    --primary-brown: #8b4e3a;
+    --dark-brown: #6d3a2a;
+    --light-brown: #d4a88f;
+    
+    /* 辅助色 */
+    --secondary-green: #5a7a5a;
+    --accent-orange: #ff9a56;
+    
+    /* 中性色 */
+    --gray-dark: #8b8b8b;
+    --gray-medium: #bbb;
+    --gray-light: #e0e0e0;
+    --beige: #f0ead6;
+    --cream: #f5ede0;
+    
+    /* 文字颜色 */
+    --text-primary: #333;
+    --text-secondary: #555;
+    --text-light: #666;
+    --text-white: #fff;
+    
+    /* 边框颜色 */
+    --border-dark: #5a2f20;
+    --border-medium: #7a4433;
+    --border-light: #ccc;
+    
+    /* 阴影 */
+    --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.15);
+    --shadow-heavy: 0 8px 20px rgba(0, 0, 0, 0.2);
+    
+    /* 圆角 */
+    --radius-small: 5px;
+    --radius-medium: 10px;
+    --radius-large: 15px;
+    --radius-round: 25px;
+    
+    /* 间距 */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+    --spacing-xxl: 40px;
+}
+
+/* 通用动画 */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gray-medium);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-dark);
+}
