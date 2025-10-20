@@ -19,8 +19,8 @@
 
 .mission-title {
     font-family: 'Brush Script MT', cursive;
-    font-size: 2em;
-    margin-bottom: 30px;
+    font-size: 1.5em;
+    margin-bottom: 20px;
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -30,7 +30,7 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
 }
 
 .mission-item {
@@ -39,6 +39,7 @@
     gap: 15px;
     cursor: pointer;
     transition: all 0.3s;
+    font-size: 0.95em;
 }
 
 .mission-item:hover {
@@ -433,4 +434,18 @@ body.modal-open {
         width: 80px;
         height: 80px;
     }
+}
+
+/* ===== 左侧 Dish 名称标题自适应修正 ===== */
+.recipe-title {
+  font-family: 'Brush Script MT', cursive;
+  font-size: clamp(1rem, 2vw, 1.6rem); /* 自动根据屏幕缩放 */
+  color: white;
+  line-height: 1.2;
+  word-break: break-word;   /* 必要时断词 */
+  white-space: normal;      /* 允许多行 */
+  text-align: left;
+  margin: 0 0 10px 0;       /* 与上方 Dish 间距 */
+  max-width: 100%;          /* 保证不会溢出左栏 */
+  overflow-wrap: anywhere;  /* 长词也能断开 */
 }
